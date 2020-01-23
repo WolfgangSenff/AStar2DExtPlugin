@@ -1,0 +1,171 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Environment.tres" type="TileSet" id=1]
+[ext_resource path="res://addons/astar2d_ext/AStar2DExt.gd" type="Script" id=2]
+[ext_resource path="res://addons/astar2d_ext/TilesetterAStar2DMap.gd" type="Script" id=3]
+[ext_resource path="res://Moutains.png" type="Texture" id=4]
+[ext_resource path="res://addons/astar2d_ext/AStar2DWeight.gd" type="Script" id=5]
+[ext_resource path="res://addons/astar2d_ext/AStar2DCharacter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Main.gd" type="Script" id=7]
+[ext_resource path="res://addons/astar2d_ext/AStar2DWeight.tscn" type="PackedScene" id=8]
+[ext_resource path="res://character.png" type="Texture" id=9]
+[ext_resource path="res://Character.gd" type="Script" id=10]
+[ext_resource path="res://bad_guy.png" type="Texture" id=11]
+[ext_resource path="res://Enemy.gd" type="Script" id=12]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+AllowDiagonal = true
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1 )
+
+[sub_resource type="CircleShape2D" id=3]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Floor" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 196617, 4, 3, 262153, 4, 65539, 327689, 4, 65539, 327691, 4, 4, 327692, 4, 196609, 327693, 4, 7, 327696, 4, 4, 327697, 4, 196609, 327698, 4, 196609, 327699, 4, 196610, 393225, 4, 65539, 393227, 4, 65539, 393229, 4, 65539, 393232, 4, 65539, 458759, 4, 0, 458760, 4, 5, 458761, 4, 196615, 458763, 4, 131076, 458764, 4, 1, 458765, 4, 131080, 458766, 4, 1, 458767, 4, 1, 458768, 4, 131079, 524295, 4, 65536, 524296, 4, 65538, 524298, 4, 0, 524299, 4, 131078, 524300, 4, 65537, 524301, 4, 65537, 524302, 4, 65537, 524303, 4, 65537, 524304, 4, 65538, 589831, 4, 65536, 589832, 4, 131077, 589833, 4, 1, 589834, 4, 131078, 589835, 4, 65537, 589836, 4, 65537, 589837, 4, 65537, 589838, 4, 65537, 589839, 4, 65537, 589840, 4, 65538, 655364, 4, 196608, 655365, 4, 196609, 655366, 4, 196609, 655367, 4, 262150, 655368, 4, 65537, 655369, 4, 65541, 655370, 4, 131073, 655371, 4, 65542, 655372, 4, 65537, 655373, 4, 65537, 655374, 4, 65537, 655375, 4, 65537, 655376, 4, 262149, 655377, 4, 196609, 655378, 4, 196609, 655379, 4, 196610, 720903, 4, 131072, 720904, 4, 131073, 720905, 4, 131074, 720907, 4, 131072, 720908, 4, 131073, 720909, 4, 65544, 720910, 4, 131073, 720911, 4, 131073, 720912, 4, 131074, 786445, 4, 65539, 786449, 4, 196611, 851981, 4, 65539, 917517, 4, 131075 )
+
+[node name="AStar2DExt" type="Node2D" parent="Floor"]
+script = ExtResource( 2 )
+AStar2DMapResource = SubResource( 4 )
+IndicatorScale = Vector2( 3, 1 )
+ShowIndicators = true
+IndicatorColorGradient = SubResource( 5 )
+MaxWeight = 200.0
+IsAutotile = true
+IndicatorZIndex = 2
+
+[node name="Character" type="KinematicBody2D" parent="."]
+position = Vector2( 521.706, 509.064 )
+script = ExtResource( 10 )
+
+[node name="Sprite" type="Sprite" parent="Character"]
+position = Vector2( -0.535629, -1.07126 )
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
+position = Vector2( -0.535629, -0.535633 )
+shape = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
+current = true
+
+[node name="Mountains" type="Node2D" parent="."]
+
+[node name="Mountain" type="Node2D" parent="Mountains"]
+position = Vector2( 768, 576 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain"]
+position = Vector2( 26.9605, 12.8942 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" type="Node2D" parent="Mountains/Mountain"]
+script = ExtResource( 5 )
+
+[node name="Mountain2" type="Node2D" parent="Mountains"]
+position = Vector2( 774.562, 560.761 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain2"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain2" instance=ExtResource( 8 )]
+
+[node name="Mountain3" type="Node2D" parent="Mountains"]
+position = Vector2( 769.874, 549.51 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain3"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain3" instance=ExtResource( 8 )]
+
+[node name="Mountain4" type="Node2D" parent="Mountains"]
+position = Vector2( 797.535, 572.253 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain4"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain4" instance=ExtResource( 8 )]
+
+[node name="Mountain5" type="Node2D" parent="Mountains"]
+position = Vector2( 832, 640 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain5"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain5" instance=ExtResource( 8 )]
+
+[node name="Mountain6" type="Node2D" parent="Mountains"]
+position = Vector2( 832, 704 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain6"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain6" instance=ExtResource( 8 )]
+
+[node name="Mountain7" type="Node2D" parent="Mountains"]
+position = Vector2( 768, 704 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain7"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain7" instance=ExtResource( 8 )]
+
+[node name="Mountain8" type="Node2D" parent="Mountains"]
+position = Vector2( 768, 640 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain8"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain8" instance=ExtResource( 8 )]
+
+[node name="Mountain9" type="Node2D" parent="Mountains"]
+position = Vector2( 832, 448 )
+
+[node name="Sprite" type="Sprite" parent="Mountains/Mountain9"]
+position = Vector2( -6.10352e-05, 0 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 32, 32 )
+
+[node name="AStar2DWeight" parent="Mountains/Mountain9" instance=ExtResource( 8 )]
+
+[node name="Enemy" type="Node2D" parent="."]
+position = Vector2( 896, 512 )
+script = ExtResource( 12 )
+Speed = 100.0
+
+[node name="AStar2DCharacter" parent="Enemy" instance=ExtResource( 6 )]
+Weight = 10.0
+
+[node name="Sprite" type="Sprite" parent="Enemy"]
+texture = ExtResource( 11 )
+offset = Vector2( 32, 32 )

@@ -1,0 +1,74 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "AStar2DConnection",
+"language": "GDScript",
+"path": "res://addons/astar2d_ext/AStar2DConnection.gd"
+}, {
+"base": "Node2D",
+"class": "AStar2DExt",
+"language": "GDScript",
+"path": "res://addons/astar2d_ext/AStar2DExt.gd"
+}, {
+"base": "Resource",
+"class": "AStar2DMap",
+"language": "GDScript",
+"path": "res://addons/astar2d_ext/AStar2DMap.gd"
+}, {
+"base": "AStar2DMap",
+"class": "TilesetterAStar2DMap",
+"language": "GDScript",
+"path": "res://addons/astar2d_ext/TilesetterAStar2DMap.gd"
+} ]
+_global_script_class_icons={
+"AStar2DConnection": "",
+"AStar2DExt": "",
+"AStar2DMap": "",
+"TilesetterAStar2DMap": ""
+}
+
+[application]
+
+config/name="YouTube2"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "astar2d_ext" )
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

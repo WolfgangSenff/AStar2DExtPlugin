@@ -1,0 +1,5 @@
+
+*.md5
+*.stex
+addons/.DS_Store
+addons/astar2d_ext/.DS_Store
