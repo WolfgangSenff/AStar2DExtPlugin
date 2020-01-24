@@ -12,8 +12,6 @@ func _ready() -> void:
     for idx in mountain_randomize_iterations:
         for mountain in mountains.get_children():
             var weight_at_position = astar2dext.get_astar_weight_at_pos(mountain.global_position)
-            if weight_at_position != 1:
-                print(str(weight_at_position) + " weight at position" + str(mountain.global_position))
             var weight_child = mountain.get_node("AStar2DWeight")
             weight_child.set_weight(weight_at_position + (randi() % int(rand_range(1, 100))))
     
